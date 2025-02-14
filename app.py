@@ -15,6 +15,11 @@ app.config['SESSION_PERMANENT'] = False
 app.permanent_session_lifetime = timedelta(minutes=10)  # Set session timeout
 Session(app)  # Initialize session storage
 
+# Redirect root URL ("/") to "/search"
+@app.route('/')
+def home():
+    return redirect(url_for('search'))
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == 'POST':
