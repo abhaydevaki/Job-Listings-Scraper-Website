@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from datetime import timedelta
 from flask_session import Session
+from dotenv import load_dotenv
 import os
 from scraper.collect import collect_data
 
 app = Flask(__name__)
-app.secret_key = 'my_secret_key'  # Required for session management
+
+load_dotenv()  # Load environment variables from .env
+app.secret_key = os.getenv('SECRET_KEY')
+
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_PERMANENT'] = False
 app.permanent_session_lifetime = timedelta(minutes=10)  # Set session timeout
