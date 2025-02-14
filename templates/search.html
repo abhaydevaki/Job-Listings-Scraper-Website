@@ -1,0 +1,9 @@
+<form method="POST" action="{{ url_for('search') }}">
+    <label for="job_role">Job Role:</label>
+    <input type="text" id="job_role" name="job_role" required>
+
+    <label for="job_location">Location:</label>
+    <input type="text" id="job_location" name="job_location" required>
+
+    <button type="submit">Search Jobs</button>
+</form>

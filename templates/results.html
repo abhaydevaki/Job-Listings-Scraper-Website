@@ -1,0 +1,16 @@
+<h2>Job Results for {{ job_role }} in {{ job_location }}</h2>
+
+{% if job_results %}
+    <ul>
+        {% for job in job_results %}
+            <li>
+                <strong>{{ job['role'] }}</strong> at {{ job['company'] }} - {{ job['location'] }} 
+                (<a href="{{ job['link'] }}" target="_blank">Apply</a>)
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No job listings found.</p>
+{% endif %}
+
+<a href="{{ url_for('search') }}">Search Again</a>
