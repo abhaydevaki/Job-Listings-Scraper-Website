@@ -5,21 +5,26 @@ def collect_data(required_role, required_location):
     scraped_linkedin, scraped_indeed, scraped_glassdoor = scrape_jobs(required_role, required_location)
     job_listings = []
 
+    # Linkedin
     for linkedin_html in scraped_linkedin:
         try:
             soup = BeautifulSoup(linkedin_html, "html.parser")
 
+            # Extract Company Name
             company = soup.find("div", class_="artdeco-entity-lockup__subtitle")
-            company = company.get_text(strip=True) #if company else "Unknown"
+            company = company.get_text(strip=True) 
 
+            # Extract Role
             role = soup.find("a", class_="job-card-container__link").find("strong")
-            role = role.get_text(strip=True) #if role else "Unknown"
+            role = role.get_text(strip=True) 
 
+            # Extract Location
             location = soup.find("div", class_="artdeco-entity-lockup__caption")
             location = location.find("span").get_text(strip=True) if location else "Unknown"
 
+            # Extract Job URL
             link = soup.find("a", class_="job-card-container__link")
-            link = "https://www.linkedin.com" + link["href"] #if link else "#"
+            link = "https://www.linkedin.com" + link["href"] 
 
             if required_location.lower() == "bangalore":
                 required_location = "bengaluru"
@@ -34,10 +39,12 @@ def collect_data(required_role, required_location):
         except Exception as e:
             pass
     
+    # Indeed
     for indeed_html in scraped_indeed:
         try:
             soup = BeautifulSoup(indeed_html, "html.parser")
 
+            # Extract Company Name
             c = soup.find("span", attrs={"data-testid": "company-name"})
             company = c.get_text()
 
@@ -63,7 +70,7 @@ def collect_data(required_role, required_location):
         except Exception as e:
             pass
         
-        
+    # Glassdoor
     for glassdoor_html in scraped_glassdoor:
         try:
             soup = BeautifulSoup(glassdoor_html, "html.parser")

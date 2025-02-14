@@ -11,11 +11,12 @@ def scrape_jobs(required_role, required_location):
 
     # Set up Chrome options
     options = uc.ChromeOptions()
-    options.add_argument("--user-data-dir=C:\\Users\\abhay\\AppData\\Local\\Google\\Chrome\\User Data")  
-    options.add_argument("--profile-directory=Profile 2")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("--start-maximized")
+    options.add_argument("--user-data-dir=C:\\Users\\abhay\\AppData\\Local\\Google\\Chrome\\User Data")  # Adjust path
+    options.add_argument("--profile-directory=Profile 2") # Change if needed
+    options.add_argument("--disable-blink-features=AutomationControlled") # Helps bypass detection
+    options.add_argument("--start-maximized") # Opens browser maximized
 
+    # Initialize undetected ChromeDriver
     driver = uc.Chrome(options=options)
     time.sleep(5)
 
